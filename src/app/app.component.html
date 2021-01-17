@@ -6,9 +6,12 @@
           <label for="projectName">Project Name</label>
           <input type="text" id="projectName" class="form-control" formControlName="projectName">
         </div>
-        <span class="help-block"
-          *ngIf="!signupForm.get('projectName').valid && signupForm.get('projectName').touched">Project name is
-          required!</span>
+        <span class="help-block" *ngIf="!signupForm.get('projectName').valid && signupForm.get('projectName').touched">
+          <span *ngIf="signupForm.get('projectName').errors['projectNameIsForbidden']">This project name is
+            invalid!</span>
+          <span *ngIf="signupForm.get('projectName').errors['required']">Project name is
+            required!</span>
+        </span>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="text" class="form-control" formControlName="email">
