@@ -1,6 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubit()">
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input type="text" id="projectName" class="form-control" formControlName="projectName">
+        </div>
+        <span class="help-block"
+          *ngIf="!signupForm.get('projectName').valid && signupForm.get('projectName').touched">Project name is
+          required!</span>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" formControlName="email">
+        </div>
+        <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+          <span *ngIf="signupForm.get('email').errors['email']">Need to be an valid email!</span>
+          <span *ngIf="signupForm.get('email').errors['required']">Email is required!</span>
+        </span>
+        <div class="radio" *ngFor="let status of projectStatus">
+          <label>
+            <input type="radio" formControlName="projectStatus" [value]="status">
+            {{ status }}
+          </label>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
       <!--
           Create a Form with the following Controls and Validators
           1) Project Name (should not be empty)
